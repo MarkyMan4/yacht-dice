@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yacht Dice</title>
+    
+  <script type="module" crossorigin src="./assets/yacht.cb719448.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/style.c0ed6924.js">
+  <link rel="stylesheet" href="./assets/style.5ad1037f.css">
+</head>
+<body>
+    <h1>Yacht Dice</h1>
+    <hr>
+    <h3 id="waiting-text">waiting for game to start...</h3>
+
+    <div id="game" style="visibility: collapse">
+        <h2 id="you-title">You are </h2>
+        <table class="score-board">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th id="p1-head" class="centered-cell"></th>
+                    <th id="p2-head" class="centered-cell"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>aces</td>
+                    <td id="p1-aces" class="unscored-cell"></td>
+                    <td id="p2-aces" class="unscored-cell"></td>
+                </tr>
+                <tr>
+                    <td>deuces</td>
+                    <td id="p1-deuces" class="unscored-cell"></td>
+                    <td id="p2-deuces" class="unscored-cell"></td>
+                </tr>
+                <tr>
+                    <td>threes</td>
+                    <td id="p1-threes" class="unscored-cell"></td>
+                    <td id="p2-threes" class="unscored-cell"></td>
+                </tr>
+                <tr>
+                    <td>fours</td>
+                    <td id="p1-fours" class="unscored-cell"></td>
+                    <td id="p2-fours" class="unscored-cell"></td>
+                </tr>
+                <tr>
+                    <td>fives</td>
+                    <td id="p1-fives" class="unscored-cell"></td>
+                    <td id="p2-fives" class="unscored-cell"></td>
+                </tr>
+                <tr>
+                    <td>sixes</td>
+                    <td id="p1-sixes" class="unscored-cell"></td>
+                    <td id="p2-sixes" class="unscored-cell"></td>
+                </tr>
+                <tr>
+                    <td>four of a kind</td>
+                    <td id="p1-fourOfAKind" class="unscored-cell"></td>
+                    <td id="p2-fourOfAKind" class="unscored-cell"></td>
+                </tr>
+                <tr>
+                    <td>full house</td>
+                    <td id="p1-fullHouse" class="unscored-cell"></td>
+                    <td id="p2-fullHouse" class="unscored-cell"></td>
+                </tr>
+                <tr>
+                    <td>s straight</td>
+                    <td id="p1-smallStraight" class="unscored-cell"></td>
+                    <td id="p2-smallStraight" class="unscored-cell"></td>
+                </tr>
+                <tr>
+                    <td>l straight</td>
+                    <td id="p1-largeStraight" class="unscored-cell"></td>
+                    <td id="p2-largeStraight" class="unscored-cell"></td>
+                </tr>
+                <tr>
+                    <td>chance</td>
+                    <td id="p1-chance" class="unscored-cell"></td>
+                    <td id="p2-chance" class="unscored-cell"></td>
+                </tr>
+                <tr>
+                    <td>yacht</td>
+                    <td id="p1-yacht" class="unscored-cell"></td>
+                    <td id="p2-yacht" class="unscored-cell"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <div id="dice-in-play"></div>
+        <div id="dice-kept"></div>
+        <button id="roll-btn">roll</button>
+    </div>
+    
+</body>
+</html>
