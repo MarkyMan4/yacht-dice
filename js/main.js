@@ -9,5 +9,5 @@ function handleRoomInput() {
     sessionStorage.setItem('roomId', roomId);
     sessionStorage.setItem('nickname', nickname);
 
-    window.location.href = '../yacht.html';
+    window.location.href = './yacht.html';
 }
