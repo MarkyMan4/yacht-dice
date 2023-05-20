@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yacht Dice</title>
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+    <h1>Yacht Dice</h1>
+    <hr>
+    <h3 id="waiting-text">waiting for game to start...</h3>
+
+    <div id="game" style="visibility: collapse">
+        <h2 id="you-title">You are </h2>
+        <table class="score-board">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th id="p1-head" class="centered-text-cell"></th>
+                    <th id="p2-head" class="centered-text-cell"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>aces</td>
+                    <td id="p1-aces" class="centered-text-cell"></td>
+                    <td id="p2-aces" class="centered-text-cell"></td>
+                </tr>
+                <tr>
+                    <td>deuces</td>
+                    <td id="p1-deuces" class="centered-text-cell"></td>
+                    <td id="p2-deuces" class="centered-text-cell"></td>
+                </tr>
+                <tr>
+                    <td>threes</td>
+                    <td id="p1-threes" class="centered-text-cell"></td>
+                    <td id="p2-threes" class="centered-text-cell"></td>
+                </tr>
+                <tr>
+                    <td>fours</td>
+                    <td id="p1-fours" class="centered-text-cell"></td>
+                    <td id="p2-fours" class="centered-text-cell"></td>
+                </tr>
+                <tr>
+                    <td>fives</td>
+                    <td id="p1-fives" class="centered-text-cell"></td>
+                    <td id="p2-fives" class="centered-text-cell"></td>
+                </tr>
+                <tr>
+                    <td>sixes</td>
+                    <td id="p1-sixes" class="centered-text-cell"></td>
+                    <td id="p2-sixes" class="centered-text-cell"></td>
+                </tr>
+                <tr>
+                    <td>four of a kind</td>
+                    <td id="p1-fourOfAKind" class="centered-text-cell"></td>
+                    <td id="p2-fourOfAKind" class="centered-text-cell"></td>
+                </tr>
+                <tr>
+                    <td>full house</td>
+                    <td id="p1-fullHouse" class="centered-text-cell"></td>
+                    <td id="p2-fullHouse" class="centered-text-cell"></td>
+                </tr>
+                <tr>
+                    <td>s straight</td>
+                    <td id="p1-smallStraight" class="centered-text-cell"></td>
+                    <td id="p2-smallStraight" class="centered-text-cell"></td>
+                </tr>
+                <tr>
+                    <td>l straight</td>
+                    <td id="p1-largeStraight" class="centered-text-cell"></td>
+                    <td id="p2-largeStraight" class="centered-text-cell"></td>
+                </tr>
+                <tr>
+                    <td>chance</td>
+                    <td id="p1-chance" class="centered-text-cell"></td>
+                    <td id="p2-chance" class="centered-text-cell"></td>
+                </tr>
+                <tr>
+                    <td>yacht</td>
+                    <td id="p1-yacht" class="centered-text-cell"></td>
+                    <td id="p2-yacht" class="centered-text-cell"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <div id="dice-in-play"></div>
+        <div id="dice-kept"></div>
+        <button id="roll-btn">roll</button>
+    </div>
+    <script src="./js/yachtDice.js"></script>
+</body>
+</html>
