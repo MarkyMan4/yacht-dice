@@ -8,7 +8,7 @@ let ws = new WebSocket(`ws://localhost:8000/ws/${roomId}`);
 
 ws.onmessage = (event) => {
     let gameData = JSON.parse(event.data);
-    console.log('received from server: ', gameData);
+    // console.log('received from server: ', gameData);
 
     if(!gameStarted) {
         initializeGame(gameData);
@@ -19,6 +19,14 @@ ws.onmessage = (event) => {
     updateDice(gameData);
 
     rollBtn.disabled = gameData.turn !== playerNum || gameData.rollsLeft <= 0; // button is disabled if not clients turn
+
+    // allow scores to be selected if it's the players turn and they've rolled at least once
+    if(gameData.turn === playerNum && gameData.rollsLeft < 3) {
+        enableScoreSelection(gameData.scoreCard[playerNum]);
+    }
+    else {
+        disableScoreSelection();
+    }
 };
 
 ws.onopen = (_) => {
@@ -30,6 +38,14 @@ ws.onopen = (_) => {
         }
     }));
 }
+
+rollBtn.addEventListener('click', () => {
+    let event = {
+        eventType: 'roll'
+    };
+
+    ws.send(JSON.stringify(event));
+});
 
 function initializeGame(gameData) {
     if(document.getElementById('waiting-text')) {
@@ -46,16 +62,163 @@ function initializeGame(gameData) {
 }
 
 function updateScore(gameData) {
-
+    updateScoreForPlayer("p1", gameData.scoreCard.p1);
+    updateScoreForPlayer("p2", gameData.scoreCard.p2);
 }
 
-rollBtn.addEventListener('click', () => {
-    let event = {
-        eventType: 'roll'
+// player param should be "p1" or "p2"
+function updateScoreForPlayer(player, scoreCard) {
+    if(scoreCard.isAcesScore) {
+        document.getElementById(`${player}-aces`).innerHTML = scoreCard.aces;
+    }
+
+    if(scoreCard.isDeucesScore) {
+        document.getElementById(`${player}-deuces`).innerHTML = scoreCard.deuces;
+    }
+    
+    if(scoreCard.isThreesScore) {
+        document.getElementById(`${player}-threes`).innerHTML = scoreCard.threes;
+    }
+    
+    if(scoreCard.isFoursScore) {
+        document.getElementById(`${player}-fours`).innerHTML = scoreCard.fours;
+    }
+    
+    if(scoreCard.isFivesScore) {
+        document.getElementById(`${player}-fives`).innerHTML = scoreCard.fives;
+    }
+    
+    if(scoreCard.isSixesScore) {
+        document.getElementById(`${player}-sixes`).innerHTML = scoreCard.sixes;
+    }
+    
+    if(scoreCard.isFourOfAKindScore) {
+        document.getElementById(`${player}-fourOfAKind`).innerHTML = scoreCard.fourOfAKind;
+    }
+    
+    if(scoreCard.isFullHouseScore) {
+        document.getElementById(`${player}-fullHouse`).innerHTML = scoreCard.fullHouse;
+    }
+    
+    if(scoreCard.isSmallStraightScore) {
+        document.getElementById(`${player}-smallStraight`).innerHTML = scoreCard.smallStraight;
+    }
+    
+    if(scoreCard.isLargeStraightScore) {
+        document.getElementById(`${player}-largeStraight`).innerHTML = scoreCard.largeStraight;
+    }
+    
+    if(scoreCard.isChanceScore) {
+        document.getElementById(`${player}-chance`).innerHTML = scoreCard.chance;
+    }
+    
+    if(scoreCard.isYachtScore) {
+        document.getElementById(`${player}-yacht`).innerHTML = scoreCard.yacht;
+    }
+}
+
+function enableScoreSelection(scoreCard) {
+    if(!scoreCard.isAcesScore) {
+        document.getElementById(`${playerNum}-aces`).onclick = score;
+        document.getElementById(`${playerNum}-aces`).style.cursor = 'pointer';
+    }
+
+    if(!scoreCard.isDeucesScore) {
+        document.getElementById(`${playerNum}-deuces`).onclick = score;
+        document.getElementById(`${playerNum}-deuces`).style.cursor = 'pointer';
+    }
+    
+    if(!scoreCard.isThreesScore) {
+        document.getElementById(`${playerNum}-threes`).onclick = score;
+        document.getElementById(`${playerNum}-threes`).style.cursor = 'pointer';
+    }
+    
+    if(!scoreCard.isFoursScore) {
+        document.getElementById(`${playerNum}-fours`).onclick = score;
+        document.getElementById(`${playerNum}-fours`).style.cursor = 'pointer';
+    }
+    
+    if(!scoreCard.isFivesScore) {
+        document.getElementById(`${playerNum}-fives`).onclick = score;
+        document.getElementById(`${playerNum}-fives`).style.cursor = 'pointer';
+    }
+    
+    if(!scoreCard.isSixesScore) {
+        document.getElementById(`${playerNum}-sixes`).onclick = score;
+        document.getElementById(`${playerNum}-sixes`).style.cursor = 'pointer';
+    }
+    
+    if(!scoreCard.isFourOfAKindScore) {
+        document.getElementById(`${playerNum}-fourOfAKind`).onclick = score;
+        document.getElementById(`${playerNum}-fourOfAKind`).style.cursor = 'pointer';
+    }
+    
+    if(!scoreCard.isFullHouseScore) {
+        document.getElementById(`${playerNum}-fullHouse`).onclick = score;
+        document.getElementById(`${playerNum}-fullHouse`).style.cursor = 'pointer';
+    }
+    
+    if(!scoreCard.isSmallStraightScore) {
+        document.getElementById(`${playerNum}-smallStraight`).onclick = score;
+        document.getElementById(`${playerNum}-smallStraight`).style.cursor = 'pointer';
+    }
+    
+    if(!scoreCard.isLargeStraightScore) {
+        document.getElementById(`${playerNum}-largeStraight`).onclick = score;
+        document.getElementById(`${playerNum}-largeStraight`).style.cursor = 'pointer';
+    }
+    
+    if(!scoreCard.isChanceScore) {
+        document.getElementById(`${playerNum}-chance`).onclick = score;
+        document.getElementById(`${playerNum}-chance`).style.cursor = 'pointer';
+    }
+    
+    if(!scoreCard.isYachtScore) {
+        document.getElementById(`${playerNum}-yacht`).onclick = score;
+        document.getElementById(`${playerNum}-yacht`).style.cursor = 'pointer';
+    }
+}
+
+function disableScoreSelection() {
+    document.getElementById(`${playerNum}-aces`).onclick = null;
+    document.getElementById(`${playerNum}-aces`).style.cursor = 'default';
+    document.getElementById(`${playerNum}-deuces`).onclick = null;
+    document.getElementById(`${playerNum}-deuces`).style.cursor = 'default';
+    document.getElementById(`${playerNum}-threes`).onclick = null;
+    document.getElementById(`${playerNum}-threes`).style.cursor = 'default';
+    document.getElementById(`${playerNum}-fours`).onclick = null;
+    document.getElementById(`${playerNum}-fours`).style.cursor = 'default';
+    document.getElementById(`${playerNum}-fives`).onclick = null;
+    document.getElementById(`${playerNum}-fives`).style.cursor = 'default';
+    document.getElementById(`${playerNum}-sixes`).onclick = null;
+    document.getElementById(`${playerNum}-sixes`).style.cursor = 'default';
+    document.getElementById(`${playerNum}-fourOfAKind`).onclick = null;
+    document.getElementById(`${playerNum}-fourOfAKind`).style.cursor = 'default';
+    document.getElementById(`${playerNum}-fullHouse`).onclick = null;
+    document.getElementById(`${playerNum}-fullHouse`).style.cursor = 'default';
+    document.getElementById(`${playerNum}-smallStraight`).onclick = null;
+    document.getElementById(`${playerNum}-smallStraight`).style.cursor = 'default';
+    document.getElementById(`${playerNum}-largeStraight`).onclick = null;
+    document.getElementById(`${playerNum}-largeStraight`).style.cursor = 'default';
+    document.getElementById(`${playerNum}-chance`).onclick = null;
+    document.getElementById(`${playerNum}-chance`).style.cursor = 'default';
+    document.getElementById(`${playerNum}-yacht`).onclick = null;
+    document.getElementById(`${playerNum}-yacht`).style.cursor = 'default';
+}
+
+function score(e) {
+    let idParts = e.target.id.split('-');
+    let category = idParts[idParts.length - 1];
+
+    let eventData = {
+        eventType: 'score',
+        payload: {
+            category: category
+        }
     };
 
-    ws.send(JSON.stringify(event));
-});
+    ws.send(JSON.stringify(eventData));
+}
 
 function keepDie(e) {
     let idParts = e.target.id.split('-');
@@ -93,12 +256,7 @@ function updateDice(gameData) {
     }
 
     document.getElementById('dice-in-play').innerHTML = diceInPlayHTML;
-
-    // don't let player keep any dice if they haven't rolled yet
-    if(gameData.rollsLeft >= 3) {
-        return;
-    }
-
+    
     
     let diceKeptHTML = '';
     for(let i = 0; i < gameData.diceKept.length; i++) {
@@ -107,6 +265,11 @@ function updateDice(gameData) {
     }
     
     document.getElementById('dice-kept').innerHTML = diceKeptHTML;
+    
+    // don't let player keep any dice if they haven't rolled yet
+    if(gameData.rollsLeft >= 3) {
+        return;
+    }
     
     // don't let player operate on dice if it's not their turn
     if(gameData.turn === playerNum) {
