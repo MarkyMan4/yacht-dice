@@ -6,8 +6,18 @@ td, th {
     padding-right: 10px;
 }
 
-.centered-text-cell {
+.centered-cell {
     text-align: center;
+}
+
+.unscored-cell {
+    text-align: center;
+    color: rgb(112, 112, 112);
+}
+
+.scored-cell {
+    text-align: center;
+    color: black;
 }
 
 .die-in-play, .die-kept {

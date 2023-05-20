@@ -17,6 +17,7 @@ ws.onmessage = (event) => {
 
     updateScore(gameData);
     updateDice(gameData);
+    showScoreHints(gameData);
 
     rollBtn.disabled = gameData.turn !== playerNum || gameData.rollsLeft <= 0; // button is disabled if not clients turn
 
@@ -70,51 +71,105 @@ function updateScore(gameData) {
 function updateScoreForPlayer(player, scoreCard) {
     if(scoreCard.isAcesScore) {
         document.getElementById(`${player}-aces`).innerHTML = scoreCard.aces;
+        document.getElementById(`${player}-aces`).className = 'scored-cell';
+    }
+    else {
+        document.getElementById(`${player}-aces`).innerHTML = '';
     }
 
     if(scoreCard.isDeucesScore) {
         document.getElementById(`${player}-deuces`).innerHTML = scoreCard.deuces;
+        document.getElementById(`${player}-deuces`).className = 'scored-cell';
+    }
+    else {
+        document.getElementById(`${player}-deuces`).innerHTML = '';
     }
     
     if(scoreCard.isThreesScore) {
         document.getElementById(`${player}-threes`).innerHTML = scoreCard.threes;
+        document.getElementById(`${player}-threes`).className = 'scored-cell';
+    }
+    else {
+        document.getElementById(`${player}-threes`).innerHTML = '';
     }
     
     if(scoreCard.isFoursScore) {
         document.getElementById(`${player}-fours`).innerHTML = scoreCard.fours;
+        document.getElementById(`${player}-fours`).className = 'scored-cell';
+    }
+    else {
+        document.getElementById(`${player}-fours`).innerHTML = '';
     }
     
     if(scoreCard.isFivesScore) {
         document.getElementById(`${player}-fives`).innerHTML = scoreCard.fives;
+        document.getElementById(`${player}-fives`).className = 'scored-cell';
+    }
+    else {
+        document.getElementById(`${player}-fives`).innerHTML = '';
     }
     
     if(scoreCard.isSixesScore) {
         document.getElementById(`${player}-sixes`).innerHTML = scoreCard.sixes;
+        document.getElementById(`${player}-sixes`).className = 'scored-cell';
+    }
+    else {
+        document.getElementById(`${player}-sixes`).innerHTML = '';
     }
     
     if(scoreCard.isFourOfAKindScore) {
         document.getElementById(`${player}-fourOfAKind`).innerHTML = scoreCard.fourOfAKind;
+        document.getElementById(`${player}-fourOfAKind`).className = 'scored-cell';
+    }
+    else {
+        document.getElementById(`${player}-fourOfAKind`).innerHTML = '';
     }
     
     if(scoreCard.isFullHouseScore) {
         document.getElementById(`${player}-fullHouse`).innerHTML = scoreCard.fullHouse;
+        document.getElementById(`${player}-fullHouse`).className = 'scored-cell';
+    }
+    else {
+        document.getElementById(`${player}-fullHouse`).innerHTML = '';
     }
     
     if(scoreCard.isSmallStraightScore) {
         document.getElementById(`${player}-smallStraight`).innerHTML = scoreCard.smallStraight;
+        document.getElementById(`${player}-smallStraight`).className = 'scored-cell';
+    }
+    else {
+        document.getElementById(`${player}-smallStraight`).innerHTML = '';
     }
     
     if(scoreCard.isLargeStraightScore) {
         document.getElementById(`${player}-largeStraight`).innerHTML = scoreCard.largeStraight;
+        document.getElementById(`${player}-largeStraight`).className = 'scored-cell';
+    }
+    else {
+        document.getElementById(`${player}-largeStraight`).innerHTML = '';
     }
     
     if(scoreCard.isChanceScore) {
         document.getElementById(`${player}-chance`).innerHTML = scoreCard.chance;
+        document.getElementById(`${player}-chance`).className = 'scored-cell';
+    }
+    else {
+        document.getElementById(`${player}-chance`).innerHTML = '';
     }
     
     if(scoreCard.isYachtScore) {
         document.getElementById(`${player}-yacht`).innerHTML = scoreCard.yacht;
+        document.getElementById(`${player}-yacht`).className = 'scored-cell';
     }
+    else {
+        document.getElementById(`${player}-yacht`).innerHTML = '';
+    }
+}
+
+function showScoreHints(gameData) {
+    Object.keys(gameData.scoreHints).forEach(hint => {
+        document.getElementById(`${gameData.turn}-${hint}`).innerHTML = gameData.scoreHints[hint];
+    });
 }
 
 function enableScoreSelection(scoreCard) {
@@ -209,7 +264,7 @@ function disableScoreSelection() {
 function score(e) {
     let idParts = e.target.id.split('-');
     let category = idParts[idParts.length - 1];
-
+    
     let eventData = {
         eventType: 'score',
         payload: {
