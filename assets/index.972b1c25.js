@@ -1,0 +1,1 @@
+import"./style.c0ed6924.js";let t=document.getElementById("join-btn");t.onclick=o;function o(){let e=document.getElementById("room-id-inp").value,n=document.getElementById("nickname-id-inp").value;sessionStorage.setItem("roomId",e),sessionStorage.setItem("nickname",n),window.location.href="./yacht.html"}
