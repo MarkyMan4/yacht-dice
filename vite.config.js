@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: "./yacht-dice",
+  base: "/yacht-dice/",
   build: {
     rollupOptions: {
         input: {
