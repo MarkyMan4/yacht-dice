@@ -18,18 +18,8 @@
     <br>
     <hr>
     <br>
-    <button onclick="handleRoomInput()">join</button>
-    <script>
-        function handleRoomInput() {
-            let roomId = document.getElementById('room-id-inp').value;
-            let nickname = document.getElementById('nickname-id-inp').value;
-            sessionStorage.setItem('roomId', roomId);
-            sessionStorage.setItem('nickname', nickname);
-
-            // replace so that the back button can't be used, use must click "leave room" to leave
-            window.location.href = '../yacht.html';
-        }
-    </script>
+    <button id="join-btn">join</button>
+    <script src="./js/main.js" type="module"></script>
 </body>
 
 </html>
