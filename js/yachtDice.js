@@ -5,7 +5,7 @@ let gameStarted = false;
 let rollBtn = document.getElementById('roll-btn');
 
 // let ws = new WebSocket(`ws://localhost:8000/ws/${roomId}`);
-let ws = new WebSocket(`ws://144.202.59.75:8000/ws/${roomId}`);
+let ws = new WebSocket(`wss://yachtdiceservice.xyz/ws/${roomId}`);
 
 ws.onmessage = (event) => {
     let gameData = JSON.parse(event.data);
