@@ -1,3 +1,7 @@
+body {
+    margin-bottom: 10%;
+}
+
 td, th {
     border: 1px solid black;
     padding-top: 5px;
@@ -13,11 +17,28 @@ td, th {
 .unscored-cell {
     text-align: center;
     color: rgb(112, 112, 112);
+    cursor: default;
+}
+
+.selectable-cell {
+    text-align: center;
+    color: rgb(112, 112, 112);
+    cursor: pointer;
+}
+
+.selectable-cell:hover {
+    background-color: rgb(255, 255, 197);
 }
 
 .scored-cell {
     text-align: center;
     color: black;
+}
+
+.totals-cell {
+    text-align: center;
+    color: black;
+    font-weight: bold;
 }
 
 .die-in-play, .die-kept {
