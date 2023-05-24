@@ -6,6 +6,7 @@ let rollBtn = document.getElementById('roll-btn');
 let p1Total = document.getElementById('p1-total');
 let p2Total = document.getElementById('p2-total');
 let messageText = document.getElementById('message-text');
+let rollsLeftText = document.getElementById('rolls-left-text');
 
 const categories = [
     'aces',
@@ -27,7 +28,7 @@ let ws = new WebSocket(`ws://localhost:8000/ws/${roomId}`);
 
 ws.onmessage = (event) => {
     let gameData = JSON.parse(event.data);
-    // console.log('received from server: ', gameData);
+    console.log('received from server: ', gameData);
 
     if(!gameStarted) {
         initializeGame(gameData);
@@ -51,10 +52,9 @@ ws.onmessage = (event) => {
     }
 
     updateMessage(gameData);
-
     showScoreHints(gameData);
-
     rollBtn.disabled = gameData.turn !== playerNum || gameData.rollsLeft <= 0; // button is disabled if not clients turn
+    rollsLeftText.innerHTML = `rolls left: ${gameData.rollsLeft}`
 
     // allow scores to be selected if it's the players turn and they've rolled at least once
     if(gameData.turn === playerNum && gameData.rollsLeft < 3) {
