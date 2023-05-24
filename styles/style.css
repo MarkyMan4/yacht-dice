@@ -54,13 +54,16 @@ td, th {
     cursor: pointer;
 }
 
-#dice-in-play {
-    margin-top: 20px;
-    margin-bottom: 20px;
+.dice-area {
+    display: inline-block;
+    /* margin-top: 5px; */
+    /* margin-bottom: 5px; */
 }
 
-#dice-kept {
+.dice-area-label {
+    display: inline-block;
     /* border: 1px solid; */
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 75px;
 }

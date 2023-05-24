@@ -22,8 +22,8 @@ const categories = [
     'yacht'
 ];
 
-// let ws = new WebSocket(`ws://localhost:8000/ws/${roomId}`);
-let ws = new WebSocket(`wss://yachtdiceservice.xyz/ws/${roomId}`);
+let ws = new WebSocket(`ws://localhost:8000/ws/${roomId}`);
+// let ws = new WebSocket(`wss://yachtdiceservice.xyz/ws/${roomId}`);
 
 ws.onmessage = (event) => {
     let gameData = JSON.parse(event.data);
