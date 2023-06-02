@@ -28,7 +28,7 @@ let ws = new WebSocket(`wss://yachtdiceservice.xyz/ws/${roomId}`);
 
 ws.onmessage = (event) => {
     let gameData = JSON.parse(event.data);
-    console.log('received from server: ', gameData);
+    // console.log('received from server: ', gameData);
 
     if(!gameStarted) {
         initializeGame(gameData);
