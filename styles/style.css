@@ -71,3 +71,7 @@ td, th {
     margin-top: 10px;
     margin-bottom: 5px;
 }
+
+.bonus-row {
+    background-color: rgb(189, 255, 216);
+}

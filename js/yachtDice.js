@@ -3,6 +3,8 @@ let nickname = sessionStorage.getItem('nickname');
 let playerNum = ''; // this will be pi or p2
 let gameStarted = false;
 let rollBtn = document.getElementById('roll-btn');
+let p1UpperSum = document.getElementById("p1-upper-sum");
+let p2UpperSum = document.getElementById("p2-upper-sum");
 let p1Total = document.getElementById('p1-total');
 let p2Total = document.getElementById('p2-total');
 let messageText = document.getElementById('message-text');
@@ -101,6 +103,8 @@ function updateScore(gameData) {
     updateScoreForPlayer("p1", gameData.scoreCard.p1);
     updateScoreForPlayer("p2", gameData.scoreCard.p2);
 
+    p1UpperSum.innerHTML = gameData.upperTotals.p1;
+    p2UpperSum.innerHTML = gameData.upperTotals.p2;
     p1Total.innerHTML = gameData.totals.p1;
     p2Total.innerHTML = gameData.totals.p2;
 }
