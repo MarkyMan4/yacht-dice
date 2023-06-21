@@ -9,6 +9,9 @@ let p1Total = document.getElementById('p1-total');
 let p2Total = document.getElementById('p2-total');
 let messageText = document.getElementById('message-text');
 let rollsLeftText = document.getElementById('rolls-left-text');
+let playAgainBtn = document.getElementById('play-again-btn');
+
+playAgainBtn.addEventListener('click', (e) => restartGame());
 
 const categories = [
     'aces',
@@ -25,8 +28,8 @@ const categories = [
     'yacht'
 ];
 
-// let ws = new WebSocket(`ws://localhost:8000/ws/${roomId}`);
-let ws = new WebSocket(`wss://yachtdiceservice.xyz/ws/${roomId}`);
+let ws = new WebSocket(`ws://localhost:8000/ws/${roomId}`);
+// let ws = new WebSocket(`wss://yachtdiceservice.xyz/ws/${roomId}`);
 
 ws.onmessage = (event) => {
     let gameData = JSON.parse(event.data);
@@ -49,6 +52,9 @@ ws.onmessage = (event) => {
         }
 
         messageText.style.color = 'blue';
+
+        // show the play again button
+        playAgainBtn.style.display = 'block';
 
         return;
     }
@@ -245,4 +251,17 @@ function updateMessage(gameData) {
     }
 
     messageText.style.color = 'red';
+}
+
+function restartGame() {
+    // reset game variables and send the restart event 
+    playAgainBtn.style.display = 'none';
+    gameStarted = false;
+    messageText.innerHTML = '';
+
+    let eventData = {
+        eventType: 'restart'
+    };
+
+    ws.send(JSON.stringify(eventData));
 }
