@@ -136,6 +136,9 @@ function updateScoreForPlayer(player, scoreCard) {
 function showScoreHints(gameData) {
     Object.keys(gameData.scoreHints).forEach(hint => {
         document.getElementById(`${gameData.turn}-${hint}`).innerHTML = gameData.scoreHints[hint];
+
+        // make sure hints are showing as unscored
+        document.getElementById(`${gameData.turn}-${hint}`).className = 'unscored-cell';
     });
 }
 
