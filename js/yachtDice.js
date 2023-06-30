@@ -10,6 +10,7 @@ let p2Total = document.getElementById('p2-total');
 let messageText = document.getElementById('message-text');
 let rollsLeftText = document.getElementById('rolls-left-text');
 let playAgainBtn = document.getElementById('play-again-btn');
+let lastEvent = '';
 
 playAgainBtn.addEventListener('click', (e) => restartGame());
 
@@ -75,12 +76,12 @@ ws.onmessage = (event) => {
 
 ws.onopen = (_) => {
     // create the player on the server
-    ws.send(JSON.stringify({
+    sendEvent({
         eventType: 'name',
         payload: {
             name: nickname
         }
-    }));
+    });
 }
 
 rollBtn.addEventListener('click', () => {
@@ -88,8 +89,13 @@ rollBtn.addEventListener('click', () => {
         eventType: 'roll'
     };
 
-    ws.send(JSON.stringify(event));
+    sendEvent(event);
 });
+
+function sendEvent(eventData) {
+    lastEvent = eventData.eventType;
+    ws.send(JSON.stringify(eventData));
+}
 
 function initializeGame(gameData) {
     if(document.getElementById('waiting-text')) {
@@ -177,10 +183,10 @@ function score(e) {
         }
     };
 
-    ws.send(JSON.stringify(eventData));
+    sendEvent(eventData);
 }
 
-function keepDie(e) {
+function keepDie(e) {    
     let idParts = e.target.id.split('-');
     let dieIndex = parseInt(idParts[idParts.length - 1]);
 
@@ -191,7 +197,7 @@ function keepDie(e) {
         }
     };
     
-    ws.send(JSON.stringify(event));
+    sendEvent(event);
 }
 
 function unkeepDie(e) {
@@ -205,7 +211,7 @@ function unkeepDie(e) {
         }
     };
     
-    ws.send(JSON.stringify(event));
+    sendEvent(event);
 }
 
 function updateDice(gameData) {
@@ -231,9 +237,17 @@ function updateDice(gameData) {
         return;
     }
     
+    let diceInPlayElements = document.getElementsByClassName('die-in-play');
+    for(let d of diceInPlayElements) {
+        // play roll animation if last event was a roll
+        if(lastEvent === 'roll') {
+            d.style.animationName = 'dice-roll-anim';
+            d.style.animationDuration = '0.5s';
+        }
+    }
+
     // don't let player operate on dice if it's not their turn
     if(gameData.turn === playerNum) {
-        let diceInPlayElements = document.getElementsByClassName('die-in-play');
         for(let d of diceInPlayElements) {
             d.addEventListener('click', keepDie);
         }
@@ -266,5 +280,5 @@ function restartGame() {
         eventType: 'restart'
     };
 
-    ws.send(JSON.stringify(eventData));
+    sendEvent(eventData);
 }

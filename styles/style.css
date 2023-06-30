@@ -42,7 +42,27 @@ td, th {
     font-weight: bold;
 }
 
-.die-in-play, .die-kept {
+@keyframes dice-roll-anim {
+    0% {margin-left: 30px;}
+    100% {margin-left: 0px;}
+}
+
+.die-in-play {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 24px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    /* animation-name: dice-roll-anim;
+    animation-duration: 0.5s; */
+}
+
+.die-kept {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 24px;
     border: 1px solid black;
@@ -54,6 +74,7 @@ td, th {
     text-align: center;
     cursor: pointer;
 }
+
 
 .dice-area {
     display: inline-block;
